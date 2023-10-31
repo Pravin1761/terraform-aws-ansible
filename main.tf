@@ -1,36 +1,25 @@
-# versions.tf
-terraform {
- required_version = ">= 1.0.0"
- required_providers {
-   aws = {
-     source = "hashicorp/aws"
-     version = ">= 4.0"
-   }
- }
+# use ubuntu 20 AMI for EC2 instance
+data "aws_ami" "ubuntu" {
+    most_recent = true
+filter {
+        name   = "name"
+        values = ["ubuntu/images/hvm-ssd/*20.04-amd64-server-*"]
+    }
+filter {
+        name   = "virtualization-type"
+        values = ["hvm"]
+    }
+owners = ["099720109477"] # Canonical
 }
-
-# variables.tf
-variable "region" {
- type       = string
- default    = "eu-west-1"
- description = "AWS Region"
-}
-variable "instance_type" {
- type       = string
- default    = "t2.micro"
- description = "EC2 Instance Type"
-}
-variable "ami_id" {
- type       = string
- description = "AMI ID"
-}
-
-# main.tf
+# provision to us-east-2 region
 provider "aws" {
- region = var.region
+  region  = "us-east-2"
 }
-
-resource "aws_instance" "example" {
- ami          = var.ami_id
- instance_type = var.instance_type
+resource "aws_instance" "app_server" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+  key_name      = "app-ssh-key"
+tags = {
+    Name = var.ec2_name
+  }
 }
