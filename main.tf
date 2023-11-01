@@ -18,7 +18,7 @@ provider "aws" {
 
 resource "aws_key_pair" "my_key_pair" {
  key_name  = "app-ssh-key.pem"
- public_key = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCR7WW3YW2xh9wsW4PQH8Xithe4rJ7BmKmfbFdDQ6jbpA8jRQlzujp9S3ykuNyLIismeV+uCdi40Y15qbOauWYad/gmLs7SdMTUxpMA+a0Gx+BZM+reCfzGnCBwz6uole4oQng4FUPpf6yniHomdAq6c3GWnqposQgZnb/+TvwHXvG8qmGi6VwBurOr7jDCpL65JakSAETm5itJiapo77TzswFUxO3wDZ2Clty7sq2cyXPkMTTsgqwRIketb/x4XVx9q7G9/JibGcHC1JsB31YSzaWt+QlI42bb9CbS+1tK7/FmjRgOedVLszvM9zu0Jiy4+ejtqvVcaJV1ehcRw+IB rsa-key-20231101
+ public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCR7WW3YW2xh9wsW4PQH8Xithe4rJ7BmKmfbFdDQ6jbpA8jRQlzujp9S3ykuNyLIismeV+uCdi40Y15qbOauWYad/gmLs7SdMTUxpMA+a0Gx+BZM+reCfzGnCBwz6uole4oQng4FUPpf6yniHomdAq6c3GWnqposQgZnb/+TvwHXvG8qmGi6VwBurOr7jDCpL65JakSAETm5itJiapo77TzswFUxO3wDZ2Clty7sq2cyXPkMTTsgqwRIketb/x4XVx9q7G9/JibGcHC1JsB31YSzaWt+QlI42bb9CbS+1tK7/FmjRgOedVLszvM9zu0Jiy4+ejtqvVcaJV1ehcRw+IB rsa-key-20231101"
 }
 
 resource "aws_instance" "app_server" {
