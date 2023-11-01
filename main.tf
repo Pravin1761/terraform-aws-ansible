@@ -1,29 +1,21 @@
-name: Create EC2 Instances
+provider "aws" {
+ region = "us-west-2"
+}
 
-on:
- push:
-   branches:
-     - main
+resource "aws_instance" "ubuntu" {
+ ami          = "ami-0c55b159cbfafe1f0" # replace with your Ubuntu AMI ID
+ instance_type = "t2.micro"
 
-jobs:
- terraform:
-   runs-on: ubuntu-latest
+ tags = {
+   Name = "Ubuntu EC2 Instance"
+ }
+}
 
-   steps:
-   - name: Checkout
-     uses: actions/checkout@v2
+resource "aws_instance" "centos" {
+ ami          = "ami-0d5d9d301c853a04a" # replace with your CentOS AMI ID
+ instance_type = "t2.micro"
 
-   - name: Setup Terraform
-     uses: hashicorp/setup-terraform@v1
-
-   - name: Terraform Init
-     run: terraform init
-
-   - name: Terraform Validate
-     run: terraform validate
-
-   - name: Terraform Plan
-     run: terraform plan
-
-   - name: Terraform Apply
-     run: terraform apply -auto-approve
+ tags = {
+   Name = "CentOS EC2 Instance"
+ }
+}
